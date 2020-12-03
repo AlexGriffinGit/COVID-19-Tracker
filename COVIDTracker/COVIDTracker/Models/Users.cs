@@ -9,7 +9,9 @@ namespace COVIDTracker.Models
 {
     public class Users
     {
+        [Key]
         public int UserId { get; set; }
+
         public string Title { get; set; }
         public string Name { get; set; }
 
@@ -27,6 +29,8 @@ namespace COVIDTracker.Models
         public DateTime CheckInTime { get; set; }
         public DateTime CheckOutTime { get; set; }
         public Venues CurrentVenue { get; set; }
+
+        [ForeignKey("VenueId")]
         public int VenueId { get; set; }
     }
 }
