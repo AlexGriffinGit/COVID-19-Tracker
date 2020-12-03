@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using COVIDTracker.Data;
+using COVIDTracker.Services;
 
 namespace COVIDTracker
 {
@@ -29,6 +30,9 @@ namespace COVIDTracker
 
             services.AddDbContext<COVIDTrackerContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("COVIDTrackerContext")));
+
+            services.AddScoped<IVenueService, VenueService>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

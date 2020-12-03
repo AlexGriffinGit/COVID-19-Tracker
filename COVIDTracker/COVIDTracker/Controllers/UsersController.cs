@@ -7,22 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using COVIDTracker.Data;
 using COVIDTracker.Models;
+using COVIDTracker.Services;
 
 namespace COVIDTracker.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly COVIDTrackerContext _context;
+        private IUserService _service;
 
-        public UsersController(COVIDTrackerContext context)
+        public UsersController(IUserService service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.ToListAsync());
+            return View(await _service.UsersToListAsync());
         }
 
         // GET: Users/Details/5
@@ -33,8 +34,8 @@ namespace COVIDTracker.Controllers
                 return NotFound();
             }
 
-            var users = await _context.Users
-                .FirstOrDefaultAsync(m => m.UserId == id);
+            var users = await _service.GetUserByIdAsync(id);
+
             if (users == null)
             {
                 return NotFound();
@@ -58,8 +59,8 @@ namespace COVIDTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(users);
-                await _context.SaveChangesAsync();
+                await _service.AddUserAsync(users);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(users);
@@ -73,7 +74,8 @@ namespace COVIDTracker.Controllers
                 return NotFound();
             }
 
-            var users = await _context.Users.FindAsync(id);
+            var users = await _service.FindUserAsync(id);
+
             if (users == null)
             {
                 return NotFound();
@@ -97,8 +99,7 @@ namespace COVIDTracker.Controllers
             {
                 try
                 {
-                    _context.Update(users);
-                    await _context.SaveChangesAsync();
+                    await _service.UpdateUserAsync(users);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,8 +125,8 @@ namespace COVIDTracker.Controllers
                 return NotFound();
             }
 
-            var users = await _context.Users
-                .FirstOrDefaultAsync(m => m.UserId == id);
+            var users = await _service.GetUserByIdAsync(id);
+
             if (users == null)
             {
                 return NotFound();
@@ -139,15 +140,16 @@ namespace COVIDTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var users = await _context.Users.FindAsync(id);
-            _context.Users.Remove(users);
-            await _context.SaveChangesAsync();
+            var users = await _service.FindUserAsync(id);
+
+            await _service.RemoveUserAsync(users);
+
             return RedirectToAction(nameof(Index));
         }
 
         private bool UsersExists(int id)
         {
-            return _context.Users.Any(e => e.UserId == id);
+            return _service.DoesUserExist(id);
         }
     }
 }
