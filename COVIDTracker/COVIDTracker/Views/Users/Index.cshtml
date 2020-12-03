@@ -4,7 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="btn btn-outline-light btn-sm" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><button class="btn btn-outline-light btn-sm" disabled>Users Index</button></li>
+    </ol>
+</nav>
+
 <h1>Index</h1>
+
+<h4>Users</h4>
 
 <p>
     <a asp-action="Create">Create New</a>
