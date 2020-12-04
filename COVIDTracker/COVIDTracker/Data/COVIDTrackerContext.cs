@@ -17,5 +17,7 @@ namespace COVIDTracker.Data
         public DbSet<COVIDTracker.Models.Venues> Venues { get; set; }
 
         public DbSet<COVIDTracker.Models.Users> Users { get; set; }
+
+        public DbSet<COVIDTracker.Models.Log> Log { get; set; }
     }
 }
