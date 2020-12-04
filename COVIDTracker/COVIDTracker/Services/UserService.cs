@@ -57,5 +57,10 @@ namespace COVIDTracker.Services
         {
             return _context.Users.Any(e => e.UserId == id);
         }
+
+        public async Task<List<Venues>> VenuesToListAsync()
+        {
+            return await _context.Venues.ToListAsync();
+        }
     }
 }

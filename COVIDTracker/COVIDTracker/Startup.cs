@@ -33,6 +33,7 @@ namespace COVIDTracker
 
             services.AddScoped<IVenueService, VenueService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ILogService, LogService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
