@@ -13,14 +13,26 @@ namespace COVIDTracker.Models
         public int UserId { get; set; }
 
         public string Title { get; set; }
+
+        [StringLength(60, MinimumLength = 3)]
+        [Required]
         public string Name { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
         public int HouseNumber { get; set; }
+
+        [StringLength(60, MinimumLength = 3)]
+        [Required]
         public string StreetName { get; set; }
+
+        [StringLength(60, MinimumLength = 3)]
+        [Required]
         public string City { get; set; }
+
+        [StringLength(60, MinimumLength = 3)]
+        [Required]
         public string County { get; set; }
         public string Postcode { get; set; }
         public string PhoneNumber { get; set; }

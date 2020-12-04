@@ -11,14 +11,28 @@ namespace COVIDTracker.Models
         [Key]
         public int VenueId { get; set; }
 
+        [StringLength(60, MinimumLength = 3)]
+        [Required]
         public string VenueName { get; set; }
         public int Capacity { get; set; }
         public int BuildingNumber { get; set; }
+
+        [StringLength(60, MinimumLength = 3)]
+        [Required]
         public string StreetName { get; set; }
+
+        [StringLength(60, MinimumLength = 3)]
+        [Required]
         public string City { get; set; }
+
+        [StringLength(60, MinimumLength = 3)]
+        [Required]
         public string County { get; set; }
         public string Postcode { get; set; }
         public string PhoneNumber { get; set; }
+
+        [StringLength(60, MinimumLength = 3)]
+        [Required]
         public string EmailAddress { get; set; }
         public List<Users> UsersList { get; set; }
     }
