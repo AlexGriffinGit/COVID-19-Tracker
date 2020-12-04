@@ -45,8 +45,10 @@ namespace COVIDTracker.Controllers
         }
 
         // GET: Users/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewData["VenueId"] = new SelectList(await _service.VenuesToListAsync(), "VenueId", "VenueName");
+
             return View();
         }
 

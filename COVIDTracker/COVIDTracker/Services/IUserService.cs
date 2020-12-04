@@ -21,5 +21,7 @@ namespace COVIDTracker.Services
         Task RemoveUserAsync(Users user);
 
         bool DoesUserExist(int id);
+
+        Task<List<Venues>> VenuesToListAsync();
     }
 }
